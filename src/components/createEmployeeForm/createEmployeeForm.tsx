@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addEmployee } from '../../services/slice';
 import Toast from './../toast/toast';
 import { useState, useEffect } from 'react';
+import { Modal } from 'andreas-modal-simple';
+
 
 const CreateEmployeeForm = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -13,14 +15,6 @@ const CreateEmployeeForm = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (response === 'success') {
-      setShowToast(true);
-      setTimeout(() => {
-        setShowToast(false);
-      }, 5000); // masquer le toast après 5 secondes
-    }
-  }, [response]);
 
   const hideToast = () => {
     setShowToast(false);
@@ -32,12 +26,20 @@ const CreateEmployeeForm = () => {
       const newEmployee = [...listOfEmployees];
       newEmployee.push(data);
       dispatch(addEmployee(newEmployee));
+      setIsModalOpen(true);
+      setSuccess(true);
     } else {
       alert('Employee already exists');
+      setSuccess(false);
     }
   };
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
   return (
+    <div className='relative w-2/3'>
+      <div className='absolute top-1/2 right-1/2'>
+        <Modal isOpen={isModalOpen} contentTitle='Congratulations !' contentBody='coucou' success={success} />
+      </div>
     <form className='form' onSubmit={handleSubmit(onSubmit)}>
       {showToast && <Toast onClose={hideToast} />}
       <div className='form-control'>
@@ -119,6 +121,7 @@ const CreateEmployeeForm = () => {
 
       <button type="submit" className='btn btn-primary mt-5'>Save</button>
     </form>
+    </div>
   );
 }
 
