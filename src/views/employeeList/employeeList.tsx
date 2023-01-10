@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import styles from './employeeList.module.css';
-import { useSelector } from 'react-redux';
 import DataTableau from '../../components/dataTable/dataTable';
+import { useEmployeeTable } from '../../services/useEmployeeTable';
 
 interface EmployeeListProps { }
 
 const EmployeeList: FC<EmployeeListProps> = () => {
-  const listOfEmployees = useSelector((state: any) => state.EmployeeList);
+  const [employees ] = useEmployeeTable();
   const data: any = [];
-  listOfEmployees.map((employee: any) => {
+  employees.map((employee: any) => {
     data.push({
       firstname: employee.firstName.toLowerCase(),
       lastname: employee.lastName.toLowerCase(),

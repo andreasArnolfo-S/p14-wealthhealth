@@ -11,7 +11,7 @@
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
-    "andreas-modal-simple": "^0.2.3",
+    "andreas-modal-simple": "^0.4.3",
     "daisyui": "^2.46.0",
     "react": "^18.2.0",
     "react-data-table-component": "^7.5.3",
