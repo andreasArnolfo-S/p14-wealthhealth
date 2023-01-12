@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form';
 import styles from './createEmployeeForm.module.css';
 import Toast from './../toast/toast';
 import { useState, useEffect } from 'react';
-import { Modal } from 'andreas-modal-simple';
 import { useEmployeeTable } from './../../services/useEmployeeTable';
+import {Modal} from 'modal-andreas';
 
 interface Employee {
   firstName: string;
@@ -33,26 +33,48 @@ const CreateEmployeeForm = () => {
   };
 
   const onSubmit = (data: any) => {
-    const Employees = [...employees];
-    Employees.push(data);
-    addEmployee(Employees);
-    setIsModalOpen(true);
-    setContentTitle('Congratulations !');
-    setContentBody('Employee added successfully');
-    setSuccess(true);
+    const employeeExist = employees.some((employee: Employee) => employee.firstName === data.firstName && employee.lastName === data.lastName);
 
+    if (!employeeExist) {
+      setUser({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        startDate: data.startDate,
+        city: data.city,
+        department: data.department,
+      });
+      const Employees = [...employees];
+      Employees.push(data);
+      addEmployee(Employees);
+      setIsModalOpen(true);
+      setContentTitle('Congratulations !');
+      setContentBody('Employee added successfully');
+      setSuccess(true);
+    } else {
+      setIsModalOpen(true);
+      setContentTitle('Oops !');
+      setContentBody('Employee already exist');
+      setSuccess(false);
+    } 
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [success, setSuccess] = useState(false);
   const [contentTitle, setContentTitle] = useState('');
   const [contentBody, setContentBody] = useState('');
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    startDate: '',
+    city: '',
+    department: ''
+  });
 
   const handleClose = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className='relative w-full'>
+    <div className='relative w-full' >
       <div className='absolute left-1/3 top-1/3'>
         <Modal
           isOpen={isModalOpen}
@@ -60,6 +82,7 @@ const CreateEmployeeForm = () => {
           contentBody={contentBody}
           success={success}
           onClose={handleClose}
+          user={user}
         />
       </div>
       <form className='form w-1/2 m-auto flex flex-col' onSubmit={handleSubmit(onSubmit)}>

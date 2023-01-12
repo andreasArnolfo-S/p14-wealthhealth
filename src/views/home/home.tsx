@@ -6,7 +6,7 @@ import CreateEmployeeForm from './../../components/createEmployeeForm/createEmpl
 
 const Home = () => {
   return (
-    <div className={styles.Home} data-testid="Home">
+    <div className='min-h-screen' data-testid="Home">
       <Logo />
       <section className={styles.container}>
         <div>

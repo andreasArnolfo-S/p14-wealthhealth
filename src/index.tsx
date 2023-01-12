@@ -15,9 +15,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <div data-theme="emerald">
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </div>
       </PersistGate>
     </Provider>
   </React.StrictMode>

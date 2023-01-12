@@ -3,7 +3,7 @@ import Router from './views/dom-route';
 
 function App() {
   return (
-    <Router />
+      <Router />
   );
 }
 
