@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-
+import { useState } from 'react';
+import { faker } from '@faker-js/faker';
 export interface Employee {
      firstName: string;
      lastName: string;
@@ -9,32 +9,34 @@ export interface Employee {
      city: string;
      state: string;
      zip: string;
+     department: string;
 }
 
 export const useEmployeeTable = () => {
-     const [employees, setEmployees] = useState<any>(() => {
-          if (!window.localStorage) {
-               throw new Error('Local storage is not available');
-          }
+     const emp: Employee[] = [];
 
-          const storedEmployees = localStorage.getItem('employees');
-          return storedEmployees ? JSON.parse(storedEmployees) : [];
-     });
+     for( let i = 0; i < 200; i++) {
+          const employee: Employee = {
+               firstName: faker.name.firstName(),
+               lastName: faker.name.lastName(),
+               dateOfBirth: faker.date.past().toISOString().slice(0, 10),
+               startDate: faker.date.recent().toISOString().slice(0, 10),
+               street: faker.address.streetAddress(),
+               city: faker.address.city(),
+               state: faker.address.stateAbbr(),
+               zip: faker.address.zipCode(),
+               department: faker.name.jobArea()
+          };
+          emp.push(employee);
+     }
 
-     useEffect(() => {
-          if (!window.localStorage) {
-               throw new Error('Local storage is not available');
-          }
-          localStorage.setItem('employees', JSON.stringify(employees));
-     }, [employees]);
+     const [employees, setEmployees] = useState<any>([...emp]);
+
 
      const addEmployee = (employee: any) => {
-          setEmployees(employee);
+          setEmployees([...employees, employee]);
      }
 
-     const resetEmployees = () => {
-          setEmployees([]);
-     }
 
-     return [employees, addEmployee, resetEmployees];
+     return [employees, addEmployee];
 }

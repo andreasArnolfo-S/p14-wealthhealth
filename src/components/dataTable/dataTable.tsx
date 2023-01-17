@@ -20,6 +20,21 @@ interface DataTableProps {
   ]
 }
 
+/**
+ * A React component that renders a table with the data passed in as props.
+ * @param props - data - the data to be displayed in the table
+ * @returns A DataTable component with the following props:
+ *   title: "Employee List"
+ *   columns: [
+ *     {
+ *       name: 'First Name',
+ *       selector: (row: any) => row.firstname,
+ *       sortable: true,
+ *     },
+ *     {
+ *       name: 'Last Name',
+ *       selector: (row: any) =>
+ */
 const DataTableau: FC<DataTableProps> = (props) => {
   const columns = [
     {

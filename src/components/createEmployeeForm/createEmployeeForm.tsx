@@ -1,7 +1,5 @@
 import { useForm } from 'react-hook-form';
-import styles from './createEmployeeForm.module.css';
-import Toast from './../toast/toast';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useEmployeeTable } from './../../services/useEmployeeTable';
 import {Modal} from 'modal-andreas';
 
@@ -22,16 +20,11 @@ interface Employee {
  * @returns {JSX.Element} Form for creating an employee
  */
 const CreateEmployeeForm = () => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const [showToast, setShowToast] = useState(false);
-  const [employees, addEmployee, resetEmployees] = useEmployeeTable();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [employees, addEmployee] = useEmployeeTable();
 
   console.log(employees);
   
-  const hideToast = () => {
-    setShowToast(false);
-  };
-
   const onSubmit = (data: any) => {
     const employeeExist = employees.some((employee: Employee) => employee.firstName === data.firstName && employee.lastName === data.lastName);
 
@@ -75,7 +68,7 @@ const CreateEmployeeForm = () => {
   };
   return (
     <div className='relative w-full' >
-      <div className='absolute left-1/3 top-1/3'>
+      <div className='absolute'>
         <Modal
           isOpen={isModalOpen}
           contentTitle={contentTitle}
@@ -86,7 +79,6 @@ const CreateEmployeeForm = () => {
         />
       </div>
       <form className='form w-1/2 m-auto flex flex-col' onSubmit={handleSubmit(onSubmit)}>
-        {showToast && <Toast onClose={hideToast} />}
         <div className='form-control'>
           <label htmlFor="first-name" className='label'>
             <span className='label-text'>First Name</span>
