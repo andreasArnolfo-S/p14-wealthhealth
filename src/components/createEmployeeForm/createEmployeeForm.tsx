@@ -51,7 +51,7 @@ const CreateEmployeeForm = () => {
     } 
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [contentTitle, setContentTitle] = useState('');
   const [contentBody, setContentBody] = useState('');
@@ -70,12 +70,13 @@ const CreateEmployeeForm = () => {
     <div className='relative w-full' >
       <div className='absolute'>
         <Modal
-          isOpen={isModalOpen}
+          isOpen={true}
           contentTitle={contentTitle}
           contentBody={contentBody}
           success={success}
           onClose={handleClose}
-          user={user}
+          modalSize={'h-2/3'}
+
         />
       </div>
       <form className='form w-1/2 m-auto flex flex-col' onSubmit={handleSubmit(onSubmit)}>

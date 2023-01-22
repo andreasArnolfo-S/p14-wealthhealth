@@ -1,4 +1,5 @@
 import { useState } from 'react';
+/* Importing the faker library. */
 import { faker } from '@faker-js/faker';
 export interface Employee {
      firstName: string;
@@ -12,6 +13,12 @@ export interface Employee {
      department: string;
 }
 
+/**
+ * It creates a list of 200 employees, then returns the list and a function to add an employee to the
+ * list.
+ * @returns An array with two elements. The first element is the employees array and the second element
+ * is the addEmployee function.
+ */
 export const useEmployeeTable = () => {
      const emp: Employee[] = [];
 
