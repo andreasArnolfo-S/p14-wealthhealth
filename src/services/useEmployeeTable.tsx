@@ -22,7 +22,7 @@ export interface Employee {
 export const useEmployeeTable = () => {
      const emp: Employee[] = [];
 
-     for( let i = 0; i < 200; i++) {
+     for( let i = 0; i < 100; i++) {
           const employee: Employee = {
                firstName: faker.name.firstName(),
                lastName: faker.name.lastName(),

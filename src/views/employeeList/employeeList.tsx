@@ -1,11 +1,7 @@
-import React, { FC } from 'react';
-import styles from './employeeList.module.css';
 import DataTableau from '../../components/dataTable/dataTable';
 import { useEmployeeTable } from '../../services/useEmployeeTable';
 
-interface EmployeeListProps { }
-
-const EmployeeList: FC<EmployeeListProps> = () => {
+const EmployeeList = () => {
   const [employees ] = useEmployeeTable();
   const data: any = [];
   employees.map((employee: any) => {
@@ -24,7 +20,7 @@ const EmployeeList: FC<EmployeeListProps> = () => {
   });
 
   return (
-    <div className={styles.EmployeeList} data-testid="EmployeeList">
+    <div data-testid="EmployeeList">
       <DataTableau data={data}/>
     </div>
   );

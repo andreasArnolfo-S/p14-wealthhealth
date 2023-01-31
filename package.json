@@ -13,7 +13,7 @@
 		"@types/react-dom": "^18.0.10",
 		"daisyui": "^2.46.0",
 		"faker": "^6.6.6",
-		"modal-andreas": "^1.1.4",
+		"modal-andreas": "^1.2.3",
 		"react": "^18.2.0",
 		"react-data-table-component": "^7.5.3",
 		"react-dom": "^18.2.0",

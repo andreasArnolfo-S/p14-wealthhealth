@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useEmployeeTable } from './../../services/useEmployeeTable';
-import {Modal} from 'modal-andreas';
+import { Modal } from 'modal-andreas';
 
 interface Employee {
   firstName: string;
@@ -23,19 +23,16 @@ const CreateEmployeeForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [employees, addEmployee] = useEmployeeTable();
 
-  console.log(employees);
-  
+  /**
+   * The function checks if the employee already exists in the list of employees, if not, it adds the
+   * employee to the list of employees and displays a success message, otherwise, it displays an error
+   * message
+   * @param {any} data - This is the data that is passed to the form.
+   */
   const onSubmit = (data: any) => {
     const employeeExist = employees.some((employee: Employee) => employee.firstName === data.firstName && employee.lastName === data.lastName);
 
     if (!employeeExist) {
-      setUser({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        startDate: data.startDate,
-        city: data.city,
-        department: data.department,
-      });
       const Employees = [...employees];
       Employees.push(data);
       addEmployee(Employees);
@@ -48,38 +45,34 @@ const CreateEmployeeForm = () => {
       setContentTitle('Oops !');
       setContentBody('Employee already exist');
       setSuccess(false);
-    } 
+    }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [contentTitle, setContentTitle] = useState('');
   const [contentBody, setContentBody] = useState('');
-  const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    startDate: '',
-    city: '',
-    department: ''
-  });
 
   const handleClose = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className='relative w-full' >
-      <div className='absolute'>
+    <div>
+      <div>
+        {/* A modal component that is used to display a message to the user. */}
         <Modal
-          isOpen={true}
+          isOpen={isModalOpen}
           contentTitle={contentTitle}
           contentBody={contentBody}
           success={success}
           onClose={handleClose}
-          modalSize={'h-2/3'}
-
-        />
+          modalSize={'w-1/3'}
+          btnColor={'green'}
+          isClosable={true}
+          type={'default'}>
+        </Modal>
       </div>
-      <form className='form w-1/2 m-auto flex flex-col' onSubmit={handleSubmit(onSubmit)}>
+      <form className='form m-auto' onSubmit={handleSubmit(onSubmit)}>
         <div className='form-control'>
           <label htmlFor="first-name" className='label'>
             <span className='label-text'>First Name</span>
@@ -112,7 +105,7 @@ const CreateEmployeeForm = () => {
           {errors.startDate && <span style={{ color: 'red' }}>This field is required</span>}
         </div>
 
-        <fieldset>
+        <fieldset className='border p-5'>
           <legend>Address</legend>
           <div className='form-control'>
             <label htmlFor="street" className='label'>
@@ -149,7 +142,7 @@ const CreateEmployeeForm = () => {
         </fieldset>
 
         <label htmlFor='department'>Department</label>
-        <select id='department' className="select w-full max-w-xs" {...register("department", { required: true })}>
+        <select id='department' className="select" {...register("department", { required: true })}>
           <option value="sales">Sales</option>
           <option value="marketing">Marketing</option>
           <option value="engineering">Engineering</option>
@@ -157,7 +150,7 @@ const CreateEmployeeForm = () => {
           <option value="legal">Legal</option>
         </select>
 
-        <button type="submit" className='btn btn-primary mt-5'>Save</button>
+        <button type="submit" className='btn btn-primary mt-5 w-full'>Save</button>
       </form>
     </div>
   );

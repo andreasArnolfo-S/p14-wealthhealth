@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import DataTable from 'react-data-table-component';
-import styles from './dataTable.module.css';
 
 
 interface DataTableProps {
@@ -85,7 +84,7 @@ const DataTableau: FC<DataTableProps> = (props) => {
   ];
 
   const [filterText, setFilterText] = React.useState('');
-  const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
+  const [resetPaginationToggle] = React.useState(false);
 
   const filteredItems = props.data.filter((item: any) => item.firstname && item.firstname.toLowerCase().includes(filterText.toLowerCase()));
   const subHeaderComponentMemo = () => {
