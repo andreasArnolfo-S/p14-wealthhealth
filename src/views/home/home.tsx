@@ -7,9 +7,7 @@ const Home = () => {
     <div className='min-h-screen' data-testid="Home">
       <Logo />
       <section className='flex flex-col justify-center items-center'>
-        <div>
-          <Link to={'/employees'} className='btn btn-primary'>View Current Employees</Link>
-        </div>
+        <Link to={'/employees'} className='btn btn-primary'>View Current Employees</Link>
         <CreateEmployeeForm />
       </section>
     </div>

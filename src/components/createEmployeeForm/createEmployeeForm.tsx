@@ -61,7 +61,7 @@ const CreateEmployeeForm = () => {
       <div>
         {/* A modal component that is used to display a message to the user. */}
         <Modal
-          isOpen={isModalOpen}
+          isOpen={true}
           contentTitle={contentTitle}
           contentBody={contentBody}
           success={success}
