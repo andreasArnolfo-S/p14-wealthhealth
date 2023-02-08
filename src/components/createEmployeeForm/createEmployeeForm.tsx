@@ -61,13 +61,13 @@ const CreateEmployeeForm = () => {
       <div>
         {/* A modal component that is used to display a message to the user. */}
         <Modal
-          isOpen={true}
+          isOpen={isModalOpen}
           contentTitle={contentTitle}
           contentBody={contentBody}
           success={success}
           onClose={handleClose}
-          modalSize={'w-1/3'}
-          btnColor={'green'}
+          modalSize={'600px'}
+          btnColor={''}
           isClosable={true}
           type={'default'}>
         </Modal>
